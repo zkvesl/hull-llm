@@ -11,8 +11,8 @@ path = "src/lib.rs"
 name = "hull-llm"
 path = "src/main.rs"
 
-# Vesl pin: hull-split-base (db51140)
-# Nockchain pin: a19f801 (zorp-corp/nockchain master tip)
+# Vesl pin: hull-split-base (ee88748)
+# Nockchain pin: a19f801 (nockchain/nockchain master tip)
 
 [dependencies]
 hex = "0.4"
@@ -31,23 +31,23 @@ bytes = "1"
 getrandom = "0.3"
 
 # --- Vesl extracted crates (git-dep to zkvesl/vesl) ---
-nock-noun-rs      = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d" }
-nockchain-tip5-rs = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d", features = ["serde"] }
-vesl-core         = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d", features = ["clap"] }
+nock-noun-rs      = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e" }
+nockchain-tip5-rs = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["serde"] }
+vesl-core         = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["clap"] }
 
 # --- Nockchain upstream ---
-nockvm           = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-nockvm_macros    = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-nockapp          = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", default-features = false }
-nockapp-grpc     = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-nockchain-types  = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-nockchain-math   = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-ibig             = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-noun-serde       = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
-zkvm-jetpack     = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockvm           = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockvm_macros    = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockapp          = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", default-features = false }
+nockapp-grpc     = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockchain-types  = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockchain-math   = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+ibig             = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+noun-serde       = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+zkvm-jetpack     = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
 
 # Optional wallet kernel for dumbnet key management
-kernels-open-wallet = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", optional = true }
+kernels-open-wallet = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", optional = true }
 
 # --- Local kernel crate (moved with hull-llm from vesl) ---
 kernels_vesl = { path = "kernels/vesl" }

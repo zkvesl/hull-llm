@@ -2949,7 +2949,7 @@ dependencies = [
 [[package]]
 name = "ibig"
 version = "0.3.6"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "cfg-if",
  "num-traits",
@@ -3347,7 +3347,7 @@ dependencies = [
 [[package]]
 name = "kernels-open-wallet"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 
 [[package]]
 name = "kernels_vesl"
@@ -3642,7 +3642,7 @@ dependencies = [
 [[package]]
 name = "murmur3"
 version = "0.5.2"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 
 [[package]]
 name = "native-tls"
@@ -3670,7 +3670,7 @@ checksum = "b93853da6d84c2e3c7d730d6473e8817692dd89be387eb01b94d7f108ecb5b8c"
 [[package]]
 name = "nock-noun-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=db51140fb27df90bc2b9f7c9eefac450a9cebf1d#db51140fb27df90bc2b9f7c9eefac450a9cebf1d"
+source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockapp",
  "nockvm",
@@ -3679,7 +3679,7 @@ dependencies = [
 [[package]]
 name = "nockapp"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3736,7 +3736,7 @@ dependencies = [
 [[package]]
 name = "nockapp-grpc"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3775,7 +3775,7 @@ dependencies = [
 [[package]]
 name = "nockapp-grpc-proto"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "glob",
@@ -3795,7 +3795,7 @@ dependencies = [
 [[package]]
 name = "nockchain-client-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=db51140fb27df90bc2b9f7c9eefac450a9cebf1d#db51140fb27df90bc2b9f7c9eefac450a9cebf1d"
+source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "nockapp",
@@ -3810,7 +3810,7 @@ dependencies = [
 [[package]]
 name = "nockchain-math"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "argon2",
  "arrayref",
@@ -3833,7 +3833,7 @@ dependencies = [
 [[package]]
 name = "nockchain-tip5-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=db51140fb27df90bc2b9f7c9eefac450a9cebf1d#db51140fb27df90bc2b9f7c9eefac450a9cebf1d"
+source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockchain-math",
  "serde",
@@ -3844,7 +3844,7 @@ dependencies = [
 [[package]]
 name = "nockchain-types"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "alloy",
  "anyhow",
@@ -3867,7 +3867,7 @@ dependencies = [
 [[package]]
 name = "nockvm"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "autotools",
  "bincode",
@@ -3897,7 +3897,7 @@ dependencies = [
 [[package]]
 name = "nockvm_crypto"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "aes",
  "aes-siv",
@@ -3912,7 +3912,7 @@ dependencies = [
 [[package]]
 name = "nockvm_macros"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -3955,7 +3955,7 @@ dependencies = [
 [[package]]
 name = "noun-serde"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "bytes",
  "ibig",
@@ -3968,7 +3968,7 @@ dependencies = [
 [[package]]
 name = "noun-serde-derive"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "nockvm",
  "proc-macro2",
@@ -6735,7 +6735,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 [[package]]
 name = "vesl-core"
 version = "0.5.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=db51140fb27df90bc2b9f7c9eefac450a9cebf1d#db51140fb27df90bc2b9f7c9eefac450a9cebf1d"
+source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7671,7 +7671,7 @@ dependencies = [
 [[package]]
 name = "zkvm-jetpack"
 version = "0.1.0"
-source = "git+https://github.com/zorp-corp/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "argon2",
  "bitvec",
