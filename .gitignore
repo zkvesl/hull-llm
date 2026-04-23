@@ -1,0 +1,28 @@
+# Build artifacts
+/target/
+kernels/*/target/
+kernels/*/Cargo.lock
+out.jam
+*.jam.bak
+
+# Runtime state
+/.data.vesl/
+/.data.vesl-test/
+chunk_store.json
+.hull_note_counter
+.fakenet/
+*.pid
+
+# Internal
+.dev/
+.claude/
+
+# OS
+.DS_Store
+*.swp
+*~
+
+# Environment overrides
+.env
+.env.local
+vesl.toml

@@ -1,0 +1,69 @@
+[package]
+name = "hull-rag"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "hull_rag"
+path = "src/lib.rs"
+
+[[bin]]
+name = "hull-rag"
+path = "src/main.rs"
+
+# Vesl pin: hull-split-base (db51140)
+# Nockchain pin: a19f801 (zorp-corp/nockchain master tip)
+
+[dependencies]
+hex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0"
+clap = { version = "4", features = ["derive"] }
+reqwest = { version = "0.12", features = ["json"] }
+axum = "0.8"
+tower-http = { version = "0.6", features = ["limit"] }
+tower = { version = "0.5", features = ["limit", "buffer"] }
+toml = "0.8"
+zeroize = "1"
+bytes = "1"
+getrandom = "0.3"
+
+# --- Vesl extracted crates (git-dep to zkvesl/vesl) ---
+nock-noun-rs      = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d" }
+nockchain-tip5-rs = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d", features = ["serde"] }
+vesl-core         = { git = "https://github.com/zkvesl/vesl.git", rev = "db51140fb27df90bc2b9f7c9eefac450a9cebf1d", features = ["clap"] }
+
+# --- Nockchain upstream ---
+nockvm           = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockvm_macros    = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockapp          = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", default-features = false }
+nockapp-grpc     = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockchain-types  = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+nockchain-math   = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+ibig             = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+noun-serde       = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+zkvm-jetpack     = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }
+
+# Optional wallet kernel for dumbnet key management
+kernels-open-wallet = { git = "https://github.com/zorp-corp/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a", optional = true }
+
+# --- Local kernel crate (moved with hull-llm from vesl) ---
+kernels_vesl = { path = "kernels/vesl" }
+
+[dev-dependencies]
+tempfile = "3"
+tower = "0.5"
+http-body-util = "0.1"
+kernels-forge = { path = "kernels/forge" }
+# kernels-open-wallet is pulled via the `dumbnet` / `_wallet_kernel_tests` feature;
+# it needs wal.jam compiled from a local nockchain checkout, which isn't available
+# in the git-fetched source tree. Enable a feature to activate it.
+
+[features]
+# Real-key settlement against a live nockchain node.
+dumbnet = ["dep:kernels-open-wallet"]
+# Gate wallet kernel integration tests behind a feature flag.
+# Boot takes ~5-10s for the 20MB wal.jam kernel.
+_wallet_kernel_tests = ["dep:kernels-open-wallet"]
