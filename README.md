@@ -4,10 +4,6 @@ Verifiable RAG on Nockchain: ingest documents, retrieve chunks, run an LLM, prov
 
 Extracted from [zkvesl/vesl](https://github.com/zkvesl/vesl) as a standalone repo. The generic Hull template and protocol live in `vesl`; everything LLM-flavored — Ollama integration, retrieval backends, ingest pipeline, document corpus — lives here.
 
-## Status
-
-Pre-rename: crate/binary still identified as `hull-rag`. The final rename to `hull-llm` happens after the initial split verifies clean.
-
 ## Build
 
 ```
@@ -18,15 +14,15 @@ cargo build --release --features dumbnet   # real-key settlement via wallet kern
 ## Run
 
 ```
-./target/release/hull-rag --new --serve       # HTTP API
-./target/release/hull-rag --new --query "..."  # one-shot
+./target/release/hull-llm --new --serve       # HTTP API
+./target/release/hull-llm --new --query "..."  # one-shot
 ```
 
 Configure via `vesl.toml` (see `docs/configuration.md`).
 
 ## Layout
 
-- `src/` — hull-rag binary + library
+- `src/` — hull-llm binary + library
 - `tests/` — e2e integration tests (fakenet, adversarial, prover, ollama)
 - `kernels/vesl/` — the compiled Vesl kernel JAM wrapper (Hoon source lives upstream in zkvesl/vesl)
 - `kernels/forge/` — STARK prover kernel wrapper (dev/test only)

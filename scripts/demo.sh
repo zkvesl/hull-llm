@@ -23,7 +23,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-HULL_DIR="$PROJECT_ROOT/hull-rag"
+HULL_DIR="$PROJECT_ROOT/hull-llm"
 DEMO_DOCS="$PROJECT_ROOT/demo/docs"
 
 # ---------------------------------------------------------------------------

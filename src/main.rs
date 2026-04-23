@@ -18,20 +18,20 @@ use nockapp::wire::{SystemWire, Wire};
 use nockapp::NockApp;
 use tokio::sync::Mutex;
 
-use hull_rag::api;
-use hull_rag::chain;
-use hull_rag::config::{self, SettlementMode};
-use hull_rag::ingest;
-use hull_rag::llm;
-use hull_rag::merkle::{self, MerkleTree};
-use hull_rag::noun_builder;
-use hull_rag::retrieve;
-use hull_rag::signing;
-use hull_rag::tx_builder;
-use hull_rag::types::*;
+use hull_llm::api;
+use hull_llm::chain;
+use hull_llm::config::{self, SettlementMode};
+use hull_llm::ingest;
+use hull_llm::llm;
+use hull_llm::merkle::{self, MerkleTree};
+use hull_llm::noun_builder;
+use hull_llm::retrieve;
+use hull_llm::signing;
+use hull_llm::tx_builder;
+use hull_llm::types::*;
 
 #[derive(Parser)]
-#[command(name = "hull-rag", about = "Vesl Hull Orchestrator")]
+#[command(name = "hull-llm", about = "Vesl Hull Orchestrator")]
 #[group(id = "hull_cli")]
 struct Cli {
     #[command(flatten)]

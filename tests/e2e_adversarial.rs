@@ -19,9 +19,9 @@ use nockapp::wire::{SystemWire, Wire};
 use nockapp::NockApp;
 use nockvm::noun::{IndirectAtom, T};
 use tempfile::TempDir;
-use hull_rag::merkle::MerkleTree;
-use hull_rag::noun_builder;
-use hull_rag::types::*;
+use hull_llm::merkle::MerkleTree;
+use hull_llm::noun_builder;
+use hull_llm::types::*;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -525,9 +525,9 @@ mod http_api {
     use std::sync::Arc;
     use tokio::sync::Mutex;
     use tower::ServiceExt;
-    use hull_rag::api;
-    use hull_rag::llm::StubProvider;
-    use hull_rag::retrieve::KeywordRetriever;
+    use hull_llm::api;
+    use hull_llm::llm::StubProvider;
+    use hull_llm::retrieve::KeywordRetriever;
 
     async fn test_router() -> (axum::Router, api::SharedState, TempDir) {
         // Tests run without VESL_API_KEY — disable auth so assertions see
@@ -556,7 +556,7 @@ mod http_api {
                 retriever: Box::new(KeywordRetriever),
                 note_counter: 0,
                 recent_notes: std::collections::VecDeque::new(),
-                settlement: hull_rag::config::SettlementConfig::local(),
+                settlement: hull_llm::config::SettlementConfig::local(),
                 stack_size: nockapp::kernel::boot::NockStackSize::Normal,
                 output_dir: tmp.path().to_path_buf(),
             }),

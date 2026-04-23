@@ -1,14 +1,14 @@
 [package]
-name = "hull-rag"
+name = "hull-llm"
 version = "0.1.0"
 edition = "2024"
 
 [lib]
-name = "hull_rag"
+name = "hull_llm"
 path = "src/lib.rs"
 
 [[bin]]
-name = "hull-rag"
+name = "hull-llm"
 path = "src/main.rs"
 
 # Vesl pin: hull-split-base (db51140)

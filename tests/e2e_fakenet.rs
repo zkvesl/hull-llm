@@ -75,7 +75,7 @@ fn coinbase_timelock_min() -> u64 {
 #[tokio::test]
 #[ignore]
 async fn fakenet_chain_client_connects() {
-    use hull_rag::chain::{ChainClient, ChainConfig};
+    use hull_llm::chain::{ChainClient, ChainConfig};
 
     let endpoint = chain_endpoint();
     println!("Connecting to chain at {endpoint}...");
@@ -92,7 +92,7 @@ async fn fakenet_chain_client_connects() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_client_connects() {
-    use hull_rag::wallet::{WalletClient, WalletConfig};
+    use hull_llm::wallet::{WalletClient, WalletConfig};
 
     let endpoint = wallet_endpoint();
     println!("Connecting to wallet at {endpoint}...");
@@ -114,7 +114,7 @@ async fn fakenet_wallet_client_connects() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_balance_query() {
-    use hull_rag::chain::{ChainClient, ChainConfig, compute_coinbase_first_name};
+    use hull_llm::chain::{ChainClient, ChainConfig, compute_coinbase_first_name};
 
     let endpoint = chain_endpoint();
     let pkh = match wallet_address() {
@@ -156,7 +156,7 @@ async fn fakenet_balance_query() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_peek_balance() {
-    use hull_rag::chain::{ChainClient, ChainConfig, compute_coinbase_first_name, compute_simple_first_name};
+    use hull_llm::chain::{ChainClient, ChainConfig, compute_coinbase_first_name, compute_simple_first_name};
 
     let endpoint = chain_endpoint();
     let pkh = match wallet_address() {
@@ -205,8 +205,8 @@ async fn fakenet_local_pipeline_produces_settlement() {
     use nockapp::kernel::boot;
     use nockapp::wire::{SystemWire, Wire};
     use nockapp::NockApp;
-    use hull_rag::chain::{manifest_hash, SettlementData, VESL_DATA_VERSION};
-    use hull_rag::types::*;
+    use hull_llm::chain::{manifest_hash, SettlementData, VESL_DATA_VERSION};
+    use hull_llm::types::*;
 
     // Boot kernel
     let cli = boot::Cli::parse_from(["test", "--new"]);
@@ -222,11 +222,11 @@ async fn fakenet_local_pipeline_produces_settlement() {
         Chunk { id: 3, dat: "SOC2 audit Q4".into() },
     ];
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
-    let tree = hull_rag::merkle::MerkleTree::build(&leaf_data);
+    let tree = hull_llm::merkle::MerkleTree::build(&leaf_data);
     let root = tree.root();
 
     // Register root
-    let register_poke = hull_rag::noun_builder::build_register_poke(7, &root);
+    let register_poke = hull_llm::noun_builder::build_register_poke(7, &root);
     let effects = app
         .poke(SystemWire.to_wire(), register_poke)
         .await
@@ -262,7 +262,7 @@ async fn fakenet_local_pipeline_produces_settlement() {
         root,
         state: NoteState::Pending,
     };
-    let settle_poke = hull_rag::noun_builder::build_settle_poke(&note, &manifest, &root);
+    let settle_poke = hull_llm::noun_builder::build_settle_poke(&note, &manifest, &root);
     let effects = app
         .poke(SystemWire.to_wire(), settle_poke)
         .await
@@ -303,7 +303,7 @@ async fn fakenet_local_pipeline_produces_settlement() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_find_settlement_notes() {
-    use hull_rag::chain::{ChainClient, ChainConfig};
+    use hull_llm::chain::{ChainClient, ChainConfig};
 
     let endpoint = chain_endpoint();
     let pkh = match wallet_address() {
@@ -343,7 +343,7 @@ async fn fakenet_reject_tampered_settlement() {
     use nockapp::kernel::boot;
     use nockapp::wire::{SystemWire, Wire};
     use nockapp::NockApp;
-    use hull_rag::types::*;
+    use hull_llm::types::*;
 
     // Boot kernel
     let cli = boot::Cli::parse_from(["test", "--new"]);
@@ -357,11 +357,11 @@ async fn fakenet_reject_tampered_settlement() {
         Chunk { id: 1, dat: "Valid data B".into() },
     ];
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
-    let tree = hull_rag::merkle::MerkleTree::build(&leaf_data);
+    let tree = hull_llm::merkle::MerkleTree::build(&leaf_data);
     let root = tree.root();
 
     // Register root
-    let register_poke = hull_rag::noun_builder::build_register_poke(7, &root);
+    let register_poke = hull_llm::noun_builder::build_register_poke(7, &root);
     app.poke(SystemWire.to_wire(), register_poke)
         .await
         .expect("register must succeed");
@@ -389,7 +389,7 @@ async fn fakenet_reject_tampered_settlement() {
         state: NoteState::Pending,
     };
 
-    let settle_poke = hull_rag::noun_builder::build_settle_poke(&note, &manifest, &root);
+    let settle_poke = hull_llm::noun_builder::build_settle_poke(&note, &manifest, &root);
     let result = app.poke(SystemWire.to_wire(), settle_poke).await;
 
     // The kernel should reject (nack) the tampered settlement.
@@ -441,26 +441,26 @@ async fn fakenet_http_api_full_pipeline() {
 
     // Tests run without VESL_API_KEY — disable auth so asserts see
     // real status codes (not middleware's 401).
-    hull_rag::api::check_auth_config(true).expect("disable auth");
+    hull_llm::api::check_auth_config(true).expect("disable auth");
 
-    let state = Arc::new(hull_rag::api::ServerState {
-        inner: Mutex::new(hull_rag::api::AppState {
+    let state = Arc::new(hull_llm::api::ServerState {
+        inner: Mutex::new(hull_llm::api::AppState {
             app,
             chunks: Vec::new(),
             tree: None,
             hull_id: 7,
             top_k: 2,
-            retriever: Box::new(hull_rag::retrieve::KeywordRetriever),
+            retriever: Box::new(hull_llm::retrieve::KeywordRetriever),
             note_counter: 0,
             recent_notes: std::collections::VecDeque::new(),
-            settlement: hull_rag::config::SettlementConfig::local(),
+            settlement: hull_llm::config::SettlementConfig::local(),
             stack_size: nockapp::kernel::boot::NockStackSize::Normal,
             output_dir: std::env::temp_dir(),
         }),
-        llm: Box::new(hull_rag::llm::StubProvider),
+        llm: Box::new(hull_llm::llm::StubProvider),
     });
 
-    let router = hull_rag::api::router(state.clone());
+    let router = hull_llm::api::router(state.clone());
 
     // --- Step 1: Ingest documents ---
     let ingest_body = serde_json::json!({
@@ -571,7 +571,7 @@ async fn fakenet_http_api_full_pipeline() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_settlement_notedata_comprehensive() {
-    use hull_rag::chain::{
+    use hull_llm::chain::{
         SettlementData, VESL_DATA_VERSION,
         KEY_VERSION, KEY_HULL_ID, KEY_MERKLE_ROOT, KEY_NOTE_ID, KEY_MANIFEST_HASH,
     };
@@ -617,7 +617,7 @@ async fn fakenet_settlement_notedata_comprehensive() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_noun_construction() {
-    use hull_rag::wallet;
+    use hull_llm::wallet;
 
     // Peek path construction
     let path = wallet::build_peek_path(&["balance-by-pubkey", "testkey123"]);
@@ -653,8 +653,8 @@ async fn fakenet_wallet_noun_construction() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_kernel_boots_and_generates_keys() {
-    use hull_rag::wallet_kernel::{WalletKernel, TEST_SEED_PHRASE};
-    use hull_rag::chain::compute_coinbase_first_name;
+    use hull_llm::wallet_kernel::{WalletKernel, TEST_SEED_PHRASE};
+    use hull_llm::chain::compute_coinbase_first_name;
 
     let tmp = tempfile::tempdir().expect("tempdir");
 
@@ -707,7 +707,7 @@ async fn fakenet_wallet_kernel_boots_and_generates_keys() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_kernel_tracked_pubkeys() {
-    use hull_rag::wallet_kernel::{WalletKernel, TEST_SEED_PHRASE};
+    use hull_llm::wallet_kernel::{WalletKernel, TEST_SEED_PHRASE};
 
     let tmp = tempfile::tempdir().expect("tempdir");
 
@@ -765,7 +765,7 @@ async fn fakenet_wallet_kernel_tracked_pubkeys() {
 async fn fakenet_wallet_kernel_create_tx_synthetic() {
     use nockchain_types::tx_engine::common::{Name as ChainName, Hash as ChainHash};
     use nockchain_types::tx_engine::v1::tx::SpendCondition;
-    use hull_rag::wallet_kernel::{
+    use hull_llm::wallet_kernel::{
         WalletKernel, TEST_SEED_PHRASE,
         simple_pkh_lock, note_v1_with_lock, balance_page,
     };
@@ -940,7 +940,7 @@ async fn fakenet_wallet_kernel_create_tx_synthetic() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_wallet_p2pkh_live() {
-    use hull_rag::chain::{ChainClient, ChainConfig};
+    use hull_llm::chain::{ChainClient, ChainConfig};
 
     let endpoint = chain_endpoint();
     let mining_pkh_b58 = match wallet_address() {
@@ -1013,7 +1013,7 @@ async fn fakenet_kernel_sig_hash_computes() {
     use nockchain_types::tx_engine::common::{Hash as ChainHash, Nicks};
     use nockchain_types::tx_engine::v1::note::NoteData;
     use nockchain_types::tx_engine::v1::tx::{Seed, Seeds};
-    use hull_rag::tx_builder::kernel_sig_hash;
+    use hull_llm::tx_builder::kernel_sig_hash;
 
     println!("  Booting vesl kernel...");
     let cli = boot::Cli::parse_from(["test", "--new"]);
@@ -1051,7 +1051,7 @@ async fn fakenet_kernel_sig_hash_deterministic() {
     use nockchain_types::tx_engine::common::{Hash as ChainHash, Nicks};
     use nockchain_types::tx_engine::v1::note::NoteData;
     use nockchain_types::tx_engine::v1::tx::{Seed, Seeds};
-    use hull_rag::tx_builder::kernel_sig_hash;
+    use hull_llm::tx_builder::kernel_sig_hash;
 
     let cli = boot::Cli::parse_from(["test", "--new"]);
     let mut app: NockApp = boot::setup(kernels_vesl::KERNEL, cli, &[], "vesl", None)
@@ -1090,7 +1090,7 @@ async fn fakenet_kernel_tx_id_computes() {
     use nockchain_types::tx_engine::v1::tx::Spend as TxSpend;
     use nockchain_types::tx_engine::common::Name as ChainName;
     use nockvm_macros::tas;
-    use hull_rag::tx_builder::kernel_tx_id;
+    use hull_llm::tx_builder::kernel_tx_id;
 
     println!("  Booting vesl kernel...");
     let cli = boot::Cli::parse_from(["test", "--new"]);
@@ -1149,8 +1149,8 @@ async fn fakenet_kernel_settlement_tx_roundtrip() {
     use nockapp::NockApp;
     use nockchain_math::belt::Belt;
     use nockchain_types::tx_engine::common::{Hash as ChainHash, Name as ChainName};
-    use hull_rag::chain::SettlementData;
-    use hull_rag::tx_builder::{build_settlement_tx, SettlementTxParams};
+    use hull_llm::chain::SettlementData;
+    use hull_llm::tx_builder::{build_settlement_tx, SettlementTxParams};
 
     println!("  Booting vesl kernel...");
     let cli = boot::Cli::parse_from(["test", "--new"]);
@@ -1164,7 +1164,7 @@ async fn fakenet_kernel_settlement_tx_roundtrip() {
     sk[0] = Belt(12345);
     sk[1] = Belt(67890);
 
-    let pkh = hull_rag::signing::pubkey_hash(&hull_rag::signing::derive_pubkey(&sk));
+    let pkh = hull_llm::signing::pubkey_hash(&hull_llm::signing::derive_pubkey(&sk));
 
     let params = SettlementTxParams {
         input_name: ChainName::new(
@@ -1249,12 +1249,12 @@ async fn fakenet_on_chain_settlement_roundtrip() {
     use nockapp::NockApp;
     use nockchain_math::belt::Belt;
     use nockchain_types::tx_engine::common::{Hash as ChainHash, Name as ChainName};
-    use hull_rag::chain::{
+    use hull_llm::chain::{
         extract_spendable_utxos, manifest_hash, ChainClient, ChainConfig, SettlementData,
         VESL_DATA_VERSION,
     };
-    use hull_rag::tx_builder::{build_settlement_tx, SettlementTxParams};
-    use hull_rag::types::*;
+    use hull_llm::tx_builder::{build_settlement_tx, SettlementTxParams};
+    use hull_llm::types::*;
 
     let endpoint = chain_endpoint();
     let mining_pkh_b58 = match wallet_address() {
@@ -1282,12 +1282,12 @@ async fn fakenet_on_chain_settlement_roundtrip() {
         Chunk { id: 3, dat: "SOC2 audit Q4".into() },
     ];
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
-    let tree = hull_rag::merkle::MerkleTree::build(&leaf_data);
+    let tree = hull_llm::merkle::MerkleTree::build(&leaf_data);
     let root = tree.root();
-    println!("    Merkle root: {}", hull_rag::merkle::format_tip5(&root));
+    println!("    Merkle root: {}", hull_llm::merkle::format_tip5(&root));
 
     // Register root in kernel
-    let register_poke = hull_rag::noun_builder::build_register_poke(7, &root);
+    let register_poke = hull_llm::noun_builder::build_register_poke(7, &root);
     app.poke(SystemWire.to_wire(), register_poke)
         .await
         .expect("register poke must succeed");
@@ -1315,7 +1315,7 @@ async fn fakenet_on_chain_settlement_roundtrip() {
     };
 
     let note = Note { id: 1, hull: 7, root, state: NoteState::Pending };
-    let settle_poke = hull_rag::noun_builder::build_settle_poke(&note, &manifest, &root);
+    let settle_poke = hull_llm::noun_builder::build_settle_poke(&note, &manifest, &root);
     app.poke(SystemWire.to_wire(), settle_poke)
         .await
         .expect("settle poke must succeed");
@@ -1377,7 +1377,7 @@ async fn fakenet_on_chain_settlement_roundtrip() {
     let mut sk = [Belt(0); 8];
     sk[0] = Belt(12345);
     sk[1] = Belt(67890);
-    let pkh = hull_rag::signing::pubkey_hash(&hull_rag::signing::derive_pubkey(&sk));
+    let pkh = hull_llm::signing::pubkey_hash(&hull_llm::signing::derive_pubkey(&sk));
 
     let fee: u64 = 3_000;
     let params = SettlementTxParams {
@@ -1512,11 +1512,11 @@ async fn fakenet_on_chain_settlement_roundtrip() {
 #[tokio::test]
 #[ignore]
 async fn fakenet_synthetic_settlement_confirmation() {
-    use hull_rag::chain::{
+    use hull_llm::chain::{
         extract_settlements_from_balance, extract_spendable_utxos, manifest_hash,
         SettlementData, VESL_DATA_VERSION,
     };
-    use hull_rag::types::*;
+    use hull_llm::types::*;
 
     // --- Build settlement from a realistic pipeline ---
     let chunks = vec![
@@ -1524,7 +1524,7 @@ async fn fakenet_synthetic_settlement_confirmation() {
         Chunk { id: 1, dat: "Risk exposure: $800K".into() },
     ];
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
-    let tree = hull_rag::merkle::MerkleTree::build(&leaf_data);
+    let tree = hull_llm::merkle::MerkleTree::build(&leaf_data);
     let root = tree.root();
 
     let manifest = Manifest {

@@ -409,7 +409,7 @@ pub fn check_auth_config_with_bind(no_auth: bool, bind_addr: &str) -> Result<(),
         Ok(k) if !k.is_empty() => Ok(()),
         _ => Err(
             "VESL_API_KEY is not set. Either set it or pass --no-auth for local dev.\n\
-             Example: VESL_API_KEY=mysecret hull-rag --serve"
+             Example: VESL_API_KEY=mysecret hull-llm --serve"
                 .into(),
         ),
     }

@@ -1,7 +1,7 @@
 //! RAG-specific transaction builder — settlement orchestration.
 //!
 //! Re-exports generic tx_builder from vesl-core and adds:
-//! - SettlementTxParams (references hull-rag's SettlementData)
+//! - SettlementTxParams (references hull-llm's SettlementData)
 //! - build_settlement_tx (orchestrates kernel pokes + NoteData encoding)
 //! - settlement_to_note_data (thin wrapper)
 //! - Diagnostic poke helpers

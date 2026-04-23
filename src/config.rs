@@ -1,4 +1,4 @@
-//! Settlement mode configuration — hull-rag layer.
+//! Settlement mode configuration — hull-llm layer.
 //!
 //! Re-exports generic config from vesl-core and adds:
 //! - VeslConfig (domain-specific toml fields like ollama_url)
@@ -62,7 +62,7 @@ pub fn load_config(path: &Path) -> VeslConfig {
 // Convenience: resolve with demo key for fakenet
 // ---------------------------------------------------------------------------
 
-/// Resolve settlement config with hull-rag defaults (demo key for fakenet).
+/// Resolve settlement config with hull-llm defaults (demo key for fakenet).
 ///
 /// Thin wrapper around `SettlementConfig::resolve()` that passes the
 /// demo signing key as `default_signing_key`. Preserved for tests.
