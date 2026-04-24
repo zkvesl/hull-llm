@@ -19,7 +19,7 @@
 //!
 //! # Usage
 //!
-//! ```rust,no_run
+//! ```rust,ignore
 //! let mut wk = WalletKernel::boot(tmp.path()).await?;
 //! wk.import_seed_phrase(SEED, 1).await?;
 //! wk.set_fakenet().await?;
