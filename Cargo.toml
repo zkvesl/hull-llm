@@ -30,10 +30,10 @@ zeroize = "1"
 bytes = "1"
 getrandom = "0.3"
 
-# --- Vesl extracted crates (git-dep to zkvesl/vesl) ---
-nock-noun-rs      = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e" }
-nockchain-tip5-rs = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["serde"] }
-vesl-core         = { git = "https://github.com/zkvesl/vesl.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["clap"] }
+# --- Vesl extracted crates (git-dep to zkvesl/vesl-core) ---
+nock-noun-rs      = { git = "https://github.com/zkvesl/vesl-core.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e" }
+nockchain-tip5-rs = { git = "https://github.com/zkvesl/vesl-core.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["serde"] }
+vesl-core         = { git = "https://github.com/zkvesl/vesl-core.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e", features = ["clap"] }
 
 # --- Nockchain upstream ---
 nockvm           = { git = "https://github.com/nockchain/nockchain.git", rev = "a19f8017ef2f0ee38ea7c850a84189f817a9f93a" }

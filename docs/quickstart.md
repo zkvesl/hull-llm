@@ -70,4 +70,4 @@ The harness mines to a demo signing key so the hull can spend coinbase UTXOs wit
 - [Configuration](configuration.md) — settlement modes and `vesl.toml` fields
 - [CLI Reference](cli-reference.md) — all flags and HTTP endpoints
 - [Architecture](architecture.md) — what's inside the hull
-- [zkvesl/vesl](https://github.com/zkvesl/vesl) — the underlying SDK and protocol
+- [zkvesl/vesl-core](https://github.com/zkvesl/vesl-core) — the underlying SDK and protocol

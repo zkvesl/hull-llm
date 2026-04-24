@@ -3670,7 +3670,7 @@ checksum = "b93853da6d84c2e3c7d730d6473e8817692dd89be387eb01b94d7f108ecb5b8c"
 [[package]]
 name = "nock-noun-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
+source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockapp",
  "nockvm",
@@ -3795,7 +3795,7 @@ dependencies = [
 [[package]]
 name = "nockchain-client-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
+source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "nockapp",
@@ -3833,7 +3833,7 @@ dependencies = [
 [[package]]
 name = "nockchain-tip5-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
+source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockchain-math",
  "serde",
@@ -6735,7 +6735,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 [[package]]
 name = "vesl-core"
 version = "0.5.0"
-source = "git+https://github.com/zkvesl/vesl.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
+source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "bytes",
