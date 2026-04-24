@@ -14,12 +14,11 @@ path = "src/main.rs"
 # Vesl pin: hull-split-base (ee88748)
 # Nockchain pin: a19f801 (nockchain/nockchain master tip)
 #
-# Git deps above are the source of truth for external clones. When you
-# develop hull-llm alongside sibling zkvesl/vesl-core and nockchain/nockchain
-# checkouts, the [patch] block at the bottom of this file redirects each
-# git URL to the local sibling path so Cargo builds against your working
-# copies — no rev bumps needed during iteration. Drop the siblings and
-# the patch degrades gracefully back to git resolution.
+# hull-llm resolves vesl-core strictly via the git-dep at the pin above —
+# no local `[patch]` redirect to ../vesl-core. hull-llm is a standalone
+# repository; bumping the vesl-core rev here is the explicit channel for
+# consuming upstream changes. The nockchain [patch] block at the bottom
+# keeps the local-sibling convenience for upstream co-development.
 
 [dependencies]
 hex = "0.4"
@@ -86,12 +85,15 @@ _wallet_kernel_tests = ["dep:kernels-open-wallet"]
 # stub only. See docs/specs/RUST_HARNESS_SURVEY.md.
 rig = ["dep:rig-core"]
 
-# --- Local [patch] override (lights up when sibling clones exist) ---
-# When sibling zkvesl/vesl-core and nockchain/nockchain checkouts are
-# present at ../vesl-core and ../nockchain, Cargo resolves the git-deps
-# above through these paths instead — no rev bumps needed during local
-# iteration. Without the siblings, Cargo falls back to git resolution
-# and hull-llm still builds standalone.
+# --- Local [patch] override (nockchain only) ---
+# When a sibling nockchain/nockchain checkout is present at ../nockchain,
+# Cargo resolves the nockchain git-deps above through local paths for
+# fast upstream co-development. Without the sibling, Cargo falls back to
+# git resolution and hull-llm still builds standalone.
+#
+# vesl-core is deliberately NOT patched to a local sibling: hull-llm is a
+# standalone repo and consumes vesl-core only through the pinned git-dep.
+# Bump the rev at lines 49-51 above to pick up upstream changes.
 [patch."https://github.com/nockchain/nockchain.git"]
 nockvm              = { path = "../nockchain/crates/nockvm/rust/nockvm" }
 nockvm_macros       = { path = "../nockchain/crates/nockvm/rust/nockvm_macros" }
@@ -103,8 +105,3 @@ noun-serde          = { path = "../nockchain/crates/noun-serde" }
 ibig                = { path = "../nockchain/crates/nockvm/rust/ibig" }
 zkvm-jetpack        = { path = "../nockchain/crates/zkvm-jetpack" }
 kernels-open-wallet = { path = "../nockchain/crates/kernels/wallet" }
-
-[patch."https://github.com/zkvesl/vesl-core.git"]
-nock-noun-rs      = { path = "../vesl-core/crates/nock-noun-rs" }
-nockchain-tip5-rs = { path = "../vesl-core/crates/nockchain-tip5-rs" }
-vesl-core         = { path = "../vesl-core/crates/vesl-core" }

@@ -1,0 +1,82 @@
+name: CI
+
+# hull-llm is a standalone repo (uses git-deps + local [patch] for vesl-core
+# and nockchain). CI clones nockchain at NOCK_PIN as a sibling so local-dev
+# `[patch]` paths still resolve.
+#
+# Bump NOCK_PIN alongside any Cargo.toml change that updates the nockchain
+# git-rev pin.
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+env:
+  NOCK_PIN: c51f8040457de1c7d799de6024c4b22275371cf4
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout hull-llm
+        uses: actions/checkout@v4
+        with:
+          path: hull-llm
+
+      - name: Checkout nockchain (sibling, for [patch])
+        uses: actions/checkout@v4
+        with:
+          repository: zorp-corp/nockchain
+          ref: ${{ env.NOCK_PIN }}
+          path: nockchain
+
+      - name: Checkout vesl-core (sibling, for [patch])
+        uses: actions/checkout@v4
+        with:
+          repository: zkvesl/vesl-core
+          path: vesl-core
+
+      - uses: dtolnay/rust-toolchain@nightly
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: hull-llm
+
+      - name: cargo test
+        working-directory: hull-llm
+        run: cargo test
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout hull-llm
+        uses: actions/checkout@v4
+        with:
+          path: hull-llm
+
+      - name: Checkout nockchain (sibling)
+        uses: actions/checkout@v4
+        with:
+          repository: zorp-corp/nockchain
+          ref: ${{ env.NOCK_PIN }}
+          path: nockchain
+
+      - name: Checkout vesl-core (sibling)
+        uses: actions/checkout@v4
+        with:
+          repository: zkvesl/vesl-core
+          path: vesl-core
+
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: hull-llm
+
+      - name: cargo clippy
+        working-directory: hull-llm
+        run: cargo clippy --all-targets -- -D warnings
