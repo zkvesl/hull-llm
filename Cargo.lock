@@ -967,6 +967,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
+name = "as-any"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0f477b951e452a0b6b4a10b53ccd569042d1d01729b519e02074a9c0958a063"
+
+[[package]]
 name = "asn1-rs"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2258,6 +2264,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "eventsource-stream"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74fef4569247a5f429d9156b9d0a2599914385dd189c539334c625d8099d90ab"
+dependencies = [
+ "futures-core",
+ "nom",
+ "pin-project-lite",
+]
+
+[[package]]
 name = "fastrand"
 version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2818,6 +2835,7 @@ dependencies = [
  "nockvm_macros",
  "noun-serde",
  "reqwest 0.12.28",
+ "rig-core",
  "serde",
  "serde_json",
  "tempfile",
@@ -2949,7 +2967,6 @@ dependencies = [
 [[package]]
 name = "ibig"
 version = "0.3.6"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "cfg-if",
  "num-traits",
@@ -3347,7 +3364,6 @@ dependencies = [
 [[package]]
 name = "kernels-open-wallet"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 
 [[package]]
 name = "kernels_vesl"
@@ -3642,7 +3658,15 @@ dependencies = [
 [[package]]
 name = "murmur3"
 version = "0.5.2"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
+
+[[package]]
+name = "nanoid"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3ffa00dec017b5b1a8b7cf5e2c008bfda1aa7e0697ac1508b491fdf2622fb4d8"
+dependencies = [
+ "rand 0.8.6",
+]
 
 [[package]]
 name = "native-tls"
@@ -3670,7 +3694,6 @@ checksum = "b93853da6d84c2e3c7d730d6473e8817692dd89be387eb01b94d7f108ecb5b8c"
 [[package]]
 name = "nock-noun-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockapp",
  "nockvm",
@@ -3679,7 +3702,6 @@ dependencies = [
 [[package]]
 name = "nockapp"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3728,7 +3750,7 @@ dependencies = [
  "tracing-subscriber",
  "tracing-test",
  "tracing-tracy",
- "webpki-roots",
+ "webpki-roots 1.0.7",
  "x509-parser 0.17.0",
  "yaque",
 ]
@@ -3736,7 +3758,6 @@ dependencies = [
 [[package]]
 name = "nockapp-grpc"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3775,7 +3796,6 @@ dependencies = [
 [[package]]
 name = "nockapp-grpc-proto"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "anyhow",
  "glob",
@@ -3795,7 +3815,6 @@ dependencies = [
 [[package]]
 name = "nockchain-client-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "nockapp",
@@ -3810,7 +3829,6 @@ dependencies = [
 [[package]]
 name = "nockchain-math"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "argon2",
  "arrayref",
@@ -3833,7 +3851,6 @@ dependencies = [
 [[package]]
 name = "nockchain-tip5-rs"
 version = "0.1.0"
-source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "nockchain-math",
  "serde",
@@ -3844,7 +3861,6 @@ dependencies = [
 [[package]]
 name = "nockchain-types"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "alloy",
  "anyhow",
@@ -3867,7 +3883,6 @@ dependencies = [
 [[package]]
 name = "nockvm"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "autotools",
  "bincode",
@@ -3897,7 +3912,6 @@ dependencies = [
 [[package]]
 name = "nockvm_crypto"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "aes",
  "aes-siv",
@@ -3912,7 +3926,6 @@ dependencies = [
 [[package]]
 name = "nockvm_macros"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -3955,7 +3968,6 @@ dependencies = [
 [[package]]
 name = "noun-serde"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "bytes",
  "ibig",
@@ -3968,7 +3980,6 @@ dependencies = [
 [[package]]
 name = "noun-serde-derive"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "nockvm",
  "proc-macro2",
@@ -4232,6 +4243,15 @@ name = "option-ext"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d"
+
+[[package]]
+name = "ordered-float"
+version = "5.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b7d950ca161dc355eaf28f82b11345ed76c6e1f6eb1f4f4479e0323b9e2fbd0e"
+dependencies = [
+ "num-traits",
+]
 
 [[package]]
 name = "ordered-multimap"
@@ -5067,7 +5087,10 @@ checksum = "ab3f43e3283ab1488b624b44b0e988d0acea0b3214e694730a055cb6b2efa801"
 dependencies = [
  "base64",
  "bytes",
+ "encoding_rs",
  "futures-core",
+ "futures-util",
+ "h2",
  "http",
  "http-body",
  "http-body-util",
@@ -5076,6 +5099,8 @@ dependencies = [
  "hyper-util",
  "js-sys",
  "log",
+ "mime",
+ "mime_guess",
  "percent-encoding",
  "pin-project-lite",
  "quinn",
@@ -5087,12 +5112,14 @@ dependencies = [
  "sync_wrapper",
  "tokio",
  "tokio-rustls",
+ "tokio-util",
  "tower",
  "tower-http",
  "tower-service",
  "url",
  "wasm-bindgen",
  "wasm-bindgen-futures",
+ "wasm-streams",
  "web-sys",
 ]
 
@@ -5113,6 +5140,39 @@ checksum = "f8dd2a808d456c4a54e300a23e9f5a67e122c3024119acbfd73e3bf664491cb2"
 dependencies = [
  "hmac",
  "subtle",
+]
+
+[[package]]
+name = "rig-core"
+version = "0.35.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f31caace97ed9646cfb713f32f8321c9fe5dc6ee4390ff5041b565163bf900dc"
+dependencies = [
+ "as-any",
+ "async-stream",
+ "base64",
+ "bytes",
+ "eventsource-stream",
+ "fastrand",
+ "futures",
+ "futures-timer",
+ "glob",
+ "http",
+ "mime",
+ "mime_guess",
+ "nanoid",
+ "ordered-float",
+ "pin-project-lite",
+ "reqwest 0.13.2",
+ "schemars 1.2.1",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tokio-tungstenite",
+ "tracing",
+ "tracing-futures",
+ "url",
 ]
 
 [[package]]
@@ -5418,8 +5478,21 @@ checksum = "a2b42f36aa1cd011945615b92222f6bf73c599a102a300334cd7f8dbeec726cc"
 dependencies = [
  "dyn-clone",
  "ref-cast",
+ "schemars_derive",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "schemars_derive"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d115b50f4aaeea07e79c1912f645c7513d81715d0420f8bc77a18c6260b307f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "serde_derive_internals",
+ "syn 2.0.117",
 ]
 
 [[package]]
@@ -5553,6 +5626,17 @@ name = "serde_derive"
 version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.117",
+]
+
+[[package]]
+name = "serde_derive_internals"
+version = "0.29.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "18d26a20a969b9e3fdf2fc2d9f21eda6c40e2de84c9408bb5d3b05d499aae711"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6183,6 +6267,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "tokio-tungstenite"
+version = "0.23.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c6989540ced10490aaf14e6bad2e3d33728a2813310a0c71d1574304c49631cd"
+dependencies = [
+ "futures-util",
+ "log",
+ "rustls",
+ "rustls-pki-types",
+ "tokio",
+ "tokio-rustls",
+ "tungstenite",
+ "webpki-roots 0.26.11",
+]
+
+[[package]]
 name = "tokio-util"
 version = "0.7.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6334,7 +6434,7 @@ dependencies = [
  "tower-layer",
  "tower-service",
  "tracing",
- "webpki-roots",
+ "webpki-roots 1.0.7",
 ]
 
 [[package]]
@@ -6496,6 +6596,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "tracing-futures"
+version = "0.2.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97d095ae15e245a057c8e8451bab9b3ee1e1f68e9ba2b4fbc18d0ac5237835f2"
+dependencies = [
+ "futures",
+ "futures-task",
+ "pin-project",
+ "tracing",
+]
+
+[[package]]
 name = "tracing-log"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6602,6 +6714,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
+name = "tungstenite"
+version = "0.23.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6e2e2ce1e47ed2994fd43b04c8f618008d4cabdd5ee34027cf14f9d918edd9c8"
+dependencies = [
+ "byteorder",
+ "bytes",
+ "data-encoding",
+ "http",
+ "httparse",
+ "log",
+ "rand 0.8.6",
+ "rustls",
+ "rustls-pki-types",
+ "sha1",
+ "thiserror 1.0.69",
+ "utf-8",
+]
+
+[[package]]
 name = "typeid"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6693,6 +6825,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "utf-8"
+version = "0.7.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
+
+[[package]]
 name = "utf8_iter"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6735,7 +6873,6 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 [[package]]
 name = "vesl-core"
 version = "0.5.0"
-source = "git+https://github.com/zkvesl/vesl-core.git?rev=ee88748463297d8279ed8336af9b9d21ba78b11e#ee88748463297d8279ed8336af9b9d21ba78b11e"
 dependencies = [
  "anyhow",
  "bytes",
@@ -6892,6 +7029,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasm-streams"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9d1ec4f6517c9e11ae630e200b2b65d193279042e28edd4a2cda233e46670bbb"
+dependencies = [
+ "futures-util",
+ "js-sys",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
 name = "wasmparser"
 version = "0.244.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6944,6 +7094,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f31141ce3fc3e300ae89b78c0dd67f9708061d1d2eda54b8209346fd6be9a92c"
 dependencies = [
  "rustls-pki-types",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "0.26.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "521bc38abb08001b01866da9f51eb7c5d647a19260e00054a8c7fd5f9e57f7a9"
+dependencies = [
+ "webpki-roots 1.0.7",
 ]
 
 [[package]]
@@ -7671,7 +7830,6 @@ dependencies = [
 [[package]]
 name = "zkvm-jetpack"
 version = "0.1.0"
-source = "git+https://github.com/nockchain/nockchain.git?rev=a19f8017ef2f0ee38ea7c850a84189f817a9f93a#a19f8017ef2f0ee38ea7c850a84189f817a9f93a"
 dependencies = [
  "argon2",
  "bitvec",

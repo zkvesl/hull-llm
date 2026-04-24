@@ -223,6 +223,54 @@ impl LlmProvider for StubProvider {
 }
 
 // ---------------------------------------------------------------------------
+// RigProvider — 0xPlaygrounds/rig LLM-client scaffolding (feature-gated)
+// ---------------------------------------------------------------------------
+//
+// Phase 0: dependency-capture stub. The PhantomData reference to
+// `rig::providers::openai::Client` ensures rig-core is compiled when
+// `--features rig` is set, so any upstream API break surfaces at compile
+// time rather than being silently absent. Phase 1 will replace
+// `unimplemented!()` with a real completion call that hands `build_prompt`
+// output verbatim to Rig. See docs/specs/RUST_HARNESS_SURVEY.md.
+
+#[cfg(feature = "rig")]
+pub struct RigProvider {
+    _client: std::marker::PhantomData<rig::providers::openai::Client>,
+}
+
+#[cfg(feature = "rig")]
+impl Default for RigProvider {
+    fn default() -> Self {
+        Self {
+            _client: std::marker::PhantomData,
+        }
+    }
+}
+
+#[cfg(feature = "rig")]
+impl RigProvider {
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+#[cfg(feature = "rig")]
+impl LlmProvider for RigProvider {
+    fn generate(
+        &self,
+        _prompt: &str,
+    ) -> Pin<Box<dyn Future<Output = Result<String, LlmError>> + Send + '_>> {
+        Box::pin(async {
+            unimplemented!(
+                "RigProvider is a Phase-0 dependency-capture stub. \
+                 Phase 1 implements the real completion call — \
+                 see docs/specs/RUST_HARNESS_SURVEY.md"
+            )
+        })
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
 

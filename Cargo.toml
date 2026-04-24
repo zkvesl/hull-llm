@@ -13,6 +13,13 @@ path = "src/main.rs"
 
 # Vesl pin: hull-split-base (ee88748)
 # Nockchain pin: a19f801 (nockchain/nockchain master tip)
+#
+# Git deps above are the source of truth for external clones. When you
+# develop hull-llm alongside sibling zkvesl/vesl-core and nockchain/nockchain
+# checkouts, the [patch] block at the bottom of this file redirects each
+# git URL to the local sibling path so Cargo builds against your working
+# copies — no rev bumps needed during iteration. Drop the siblings and
+# the patch degrades gracefully back to git resolution.
 
 [dependencies]
 hex = "0.4"
@@ -29,6 +36,14 @@ toml = "0.8"
 zeroize = "1"
 bytes = "1"
 getrandom = "0.3"
+
+# Optional: Rig (0xPlaygrounds/rig) as LLM-client scaffolding.
+# Gated behind the `rig` feature. Phase 0 captures the dep only; the stub
+# impl in src/llm.rs does not yet call into rig. Phase 1 replaces the stub
+# with real OpenAI/Anthropic completion calls. Rig is pre-1.0 and the
+# maintainers expect breaking changes, so pin the exact version.
+# See docs/specs/RUST_HARNESS_SURVEY.md for the adoption plan.
+rig-core = { version = "=0.35.0", optional = true }
 
 # --- Vesl extracted crates (git-dep to zkvesl/vesl-core) ---
 nock-noun-rs      = { git = "https://github.com/zkvesl/vesl-core.git", rev = "ee88748463297d8279ed8336af9b9d21ba78b11e" }
@@ -67,3 +82,29 @@ dumbnet = ["dep:kernels-open-wallet"]
 # Gate wallet kernel integration tests behind a feature flag.
 # Boot takes ~5-10s for the 20MB wal.jam kernel.
 _wallet_kernel_tests = ["dep:kernels-open-wallet"]
+# Rig agent framework as an alternative LlmProvider. Phase 0: dep-capture
+# stub only. See docs/specs/RUST_HARNESS_SURVEY.md.
+rig = ["dep:rig-core"]
+
+# --- Local [patch] override (lights up when sibling clones exist) ---
+# When sibling zkvesl/vesl-core and nockchain/nockchain checkouts are
+# present at ../vesl-core and ../nockchain, Cargo resolves the git-deps
+# above through these paths instead — no rev bumps needed during local
+# iteration. Without the siblings, Cargo falls back to git resolution
+# and hull-llm still builds standalone.
+[patch."https://github.com/nockchain/nockchain.git"]
+nockvm              = { path = "../nockchain/crates/nockvm/rust/nockvm" }
+nockvm_macros       = { path = "../nockchain/crates/nockvm/rust/nockvm_macros" }
+nockapp             = { path = "../nockchain/crates/nockapp" }
+nockapp-grpc        = { path = "../nockchain/crates/nockapp-grpc" }
+nockchain-types     = { path = "../nockchain/crates/nockchain-types" }
+nockchain-math      = { path = "../nockchain/crates/nockchain-math" }
+noun-serde          = { path = "../nockchain/crates/noun-serde" }
+ibig                = { path = "../nockchain/crates/nockvm/rust/ibig" }
+zkvm-jetpack        = { path = "../nockchain/crates/zkvm-jetpack" }
+kernels-open-wallet = { path = "../nockchain/crates/kernels/wallet" }
+
+[patch."https://github.com/zkvesl/vesl-core.git"]
+nock-noun-rs      = { path = "../vesl-core/crates/nock-noun-rs" }
+nockchain-tip5-rs = { path = "../vesl-core/crates/nockchain-tip5-rs" }
+vesl-core         = { path = "../vesl-core/crates/vesl-core" }
