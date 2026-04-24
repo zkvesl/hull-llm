@@ -459,10 +459,8 @@ async fn adversarial_7_oversized_payload() {
     // Build a large chunk (10KB of repeated text).
     // 1MB+ causes tip5 hashing to take >60s; 10KB validates the path without timeout.
     let large_data = "A".repeat(10_000);
-    let chunks = vec![
-        Chunk { id: 0, dat: large_data.clone() },
-        Chunk { id: 1, dat: "Small chunk".into() },
-    ];
+    let chunks = [Chunk { id: 0, dat: large_data.clone() },
+        Chunk { id: 1, dat: "Small chunk".into() }];
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
     let tree = MerkleTree::build(&leaf_data);
     let root = tree.root();

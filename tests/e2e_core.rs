@@ -20,7 +20,7 @@ fn mint_guard_settle_pipeline() {
 
     // 2. Verify with Guard
     let mut guard = Guard::new();
-    guard.register_root(root);
+    guard.register_root(root).unwrap();
 
     for (i, chunk) in chunks.iter().enumerate() {
         let proof = mint.proof(i).unwrap();

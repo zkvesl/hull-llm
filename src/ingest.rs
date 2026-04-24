@@ -55,7 +55,7 @@ impl ChunkStore {
     /// Save the chunk store as JSON to `path`.
     pub fn save(&self, path: &Path) -> std::io::Result<()> {
         let json = serde_json::to_string_pretty(self)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+            .map_err(std::io::Error::other)?;
         fs::write(path, json)
     }
 
@@ -63,7 +63,7 @@ impl ChunkStore {
     pub fn load(path: &Path) -> std::io::Result<Self> {
         let json = fs::read_to_string(path)?;
         serde_json::from_str(&json)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))
+            .map_err(std::io::Error::other)
     }
 }
 

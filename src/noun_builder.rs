@@ -77,8 +77,7 @@ pub fn serialize_settlement(
 /// Returns (note, manifest, root) ready for serialization.
 #[cfg(test)]
 pub fn build_hedge_fund_scenario() -> (Note, Manifest, Tip5Hash) {
-    let chunks = vec![
-        Chunk {
+    let chunks = [Chunk {
             id: 0,
             dat: "Q3 revenue: $4.2M ARR, 18% QoQ growth".into(),
         },
@@ -93,8 +92,7 @@ pub fn build_hedge_fund_scenario() -> (Note, Manifest, Tip5Hash) {
         Chunk {
             id: 3,
             dat: "SOC2 Type II audit scheduled for Q4".into(),
-        },
-    ];
+        }];
 
     let leaf_data: Vec<&[u8]> = chunks.iter().map(|c| c.dat.as_bytes()).collect();
     let tree = MerkleTree::build(&leaf_data);

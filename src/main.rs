@@ -574,7 +574,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("    Mode: {}", settlement.mode);
         let chain_config = settlement.chain_config()
             .ok_or("chain config unavailable despite endpoint being set")?;
-        match chain::ChainClient::connect(chain_config.into()).await {
+        match chain::ChainClient::connect(chain_config).await {
             Ok(mut client) => {
                 println!("    Settlement: {settlement_data}");
 

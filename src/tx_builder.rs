@@ -11,7 +11,7 @@ pub use vesl_core::tx_builder::{
     extract_hash_from_effect, bytes_to_atom,
 };
 
-use nockapp::noun::slab::{NockJammer, NounSlab};
+use nockapp::noun::slab::NounSlab;
 use nockapp::wire::{SystemWire, Wire};
 use nockapp::NockApp;
 use nockchain_math::belt::Belt;
@@ -25,7 +25,6 @@ use nockchain_types::tx_engine::v1::{RawTx, Version};
 use nockvm::ext::make_tas;
 use nockvm::noun::{D, T};
 use nockvm_macros::tas;
-use noun_serde::NounEncode;
 
 use crate::chain::SettlementData;
 use crate::signing;
@@ -237,6 +236,8 @@ pub async fn kernel_diag_sieve(
 mod tests {
     use super::*;
     use nockchain_types::tx_engine::common::Hash;
+    use nockapp::noun::slab::NockJammer;
+    use noun_serde::NounEncode;
 
     #[test]
     fn settlement_note_data_encodes() {

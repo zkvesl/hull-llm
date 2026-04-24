@@ -399,7 +399,7 @@ pub const TEST_SEED_PHRASE: &str = "route run sing warrior light swamp clog flow
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    
 
     // Wallet kernel tests require the kernels-open-wallet crate,
     // which is a dev-dependency. They're gated behind #[ignore]

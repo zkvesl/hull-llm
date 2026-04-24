@@ -281,16 +281,14 @@ mod tests {
     #[test]
     fn build_prompt_matches_hoon_convention() {
         // Must produce: query + \n + chunk0 + \n + chunk1
-        let chunks = vec![
-            Chunk {
+        let chunks = [Chunk {
                 id: 0,
                 dat: "First chunk.".into(),
             },
             Chunk {
                 id: 1,
                 dat: "Second chunk.".into(),
-            },
-        ];
+            }];
         let refs: Vec<&Chunk> = chunks.iter().collect();
         let prompt = build_prompt("What is this?", &refs);
 
@@ -305,7 +303,7 @@ mod tests {
 
     #[test]
     fn build_prompt_single_chunk() {
-        let chunks = vec![Chunk {
+        let chunks = [Chunk {
             id: 0,
             dat: "Only chunk.".into(),
         }];

@@ -767,8 +767,7 @@ async fn query_handler(
     let mut tx_accepted: Option<bool> = None;
 
     if let (Some(_), Some(sk)) = (&st.settlement.chain_endpoint, &st.settlement.signing_key)
-    {
-        if st.settlement.can_submit() {
+        && st.settlement.can_submit() {
             let note_for_settlement = Note {
                 id: note_id,
                 hull: hull_id,
@@ -783,8 +782,8 @@ async fn query_handler(
             let pkh = signing::pubkey_hash(&signing::derive_pubkey(sk));
             let pkh_b58 = pkh.to_base58();
 
-            if let Some(chain_config) = st.settlement.chain_config() {
-            if let Ok(mut client) = chain::ChainClient::connect(chain_config.into()).await {
+            if let Some(chain_config) = st.settlement.chain_config()
+            && let Ok(mut client) = chain::ChainClient::connect(chain_config).await {
                 let balance = client
                     .get_balance_by_pkh(&pkh_b58, st.settlement.coinbase_timelock_min)
                     .await;
@@ -823,9 +822,7 @@ async fn query_handler(
                     }
                 }
             }
-            }
         }
-    }
 
     // Record in recent notes ring buffer. AUDIT 2026-04-19 M-18:
     // query text omitted — see NoteSummary doc-comment.
@@ -862,13 +859,11 @@ fn render_noun_debug(noun: nockapp::Noun, depth: usize) -> String {
             if a.as_u64() == Ok(0) { return "0".into(); }
             let bytes = a.as_ne_bytes();
             let len = bytes.iter().rposition(|&b| b != 0).map_or(0, |pos| pos + 1);
-            if len > 0 && len < 200 {
-                if let Ok(s) = std::str::from_utf8(&bytes[..len]) {
-                    if s.chars().all(|c| c.is_ascii_graphic() || c == ' ') {
+            if len > 0 && len < 200
+                && let Ok(s) = std::str::from_utf8(&bytes[..len])
+                    && s.chars().all(|c| c.is_ascii_graphic() || c == ' ') {
                         return format!("'{}'", s);
                     }
-                }
-            }
             if len <= 8 {
                 let mut val: u64 = 0;
                 for (i, &b) in bytes[..len].iter().enumerate() {
@@ -1189,7 +1184,7 @@ async fn prove_handler(
                                 }
                             }
                             if msg_parts.is_empty() {
-                                format!("trace(cued): empty list")
+                                "trace(cued): empty list".to_string()
                             } else {
                                 format!("trace(cued): {}", msg_parts.join(" | "))
                             }
@@ -1285,8 +1280,7 @@ async fn prove_handler(
     let mut tx_accepted: Option<bool> = None;
 
     if let (Some(_), Some(sk)) = (&st.settlement.chain_endpoint, &st.settlement.signing_key)
-    {
-        if st.settlement.can_submit() {
+        && st.settlement.can_submit() {
             let note_for_settlement = Note {
                 id: note_id,
                 hull: hull_id,
@@ -1314,7 +1308,7 @@ async fn prove_handler(
             let pkh_b58 = pkh.to_base58();
 
             if let Some(chain_config) = st.settlement.chain_config() {
-            match chain::ChainClient::connect(chain_config.into()).await {
+            match chain::ChainClient::connect(chain_config).await {
                 Ok(mut client) => {
                     let balance = client
                         .get_balance_by_pkh(&pkh_b58, st.settlement.coinbase_timelock_min)
@@ -1372,7 +1366,6 @@ async fn prove_handler(
                 eprintln!("[prove] no chain config");
             }
         }
-    }
 
     // Record in recent notes ring buffer. AUDIT 2026-04-19 M-18:
     // query text omitted — see NoteSummary doc-comment.
@@ -1476,7 +1469,7 @@ async fn diag_sig_hash_handler(
                     if let Ok(cell) = root.as_cell() {
                         if let Ok(inner) = cell.tail().as_cell() {
                             let tag = inner.head();
-                            let is_ok = tag.as_atom().map(|a| a.as_u64() == Ok(nockvm_macros::tas!(b"ok") as u64)).unwrap_or(false);
+                            let is_ok = tag.as_atom().map(|a| a.as_u64() == Ok(nockvm_macros::tas!(b"ok"))).unwrap_or(false);
                             if !is_ok {
                                 errors.push("diag-sieve: sieve FAILED (;;(seeds:txv1 ...) crashed)".into());
                             }
@@ -1513,9 +1506,9 @@ async fn diag_sig_hash_handler(
                     if let Ok(inner) = cell.tail().as_cell() {
                         let tag = inner.head();
                         let tag_str = if let Ok(a) = tag.as_atom() {
-                            if a.as_u64() == Ok(nockvm_macros::tas!(b"ok") as u64) {
+                            if a.as_u64() == Ok(nockvm_macros::tas!(b"ok")) {
                                 "ok".to_string()
-                            } else if a.as_u64() == Ok(nockvm_macros::tas!(b"fail") as u64) {
+                            } else if a.as_u64() == Ok(nockvm_macros::tas!(b"fail")) {
                                 "fail".to_string()
                             } else {
                                 format!("unknown-tag-{:?}", a.as_u64())

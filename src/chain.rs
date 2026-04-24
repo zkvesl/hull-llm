@@ -33,8 +33,6 @@
 //! - **Watch for transaction confirmation** via polling with configurable timeout
 //! - **Check wallet funding** before attempting settlement
 
-use std::time::Duration;
-
 use anyhow::{Context, Result};
 use nock_noun_rs::slab_root;
 use nockapp::noun::slab::{NockJammer, NounSlab};
@@ -707,11 +705,10 @@ pub fn extract_settlements_from_balance(
             Some(note) => extract_note_data(note),
             None => continue,
         };
-        if let Some(data) = note_data {
-            if let Ok(sd) = SettlementData::from_note_data(&data) {
+        if let Some(data) = note_data
+            && let Ok(sd) = SettlementData::from_note_data(&data) {
                 settlements.push(sd);
             }
-        }
     }
     Ok(settlements)
 }
@@ -1004,6 +1001,7 @@ impl std::fmt::Display for SettlementData {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::time::Duration;
 
     fn test_note() -> Note {
         Note {
